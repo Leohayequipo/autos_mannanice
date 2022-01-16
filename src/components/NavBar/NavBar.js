@@ -4,7 +4,8 @@ import Container from 'react-bootstrap/Container'
 import Nav       from 'react-bootstrap/Nav'
 import Cartwidget from '../CartWidget/Cartwidget'
 
-const NavBar = () => {
+const NavBar = (children) => {
+    console.log(children)
     return (
         <div>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
