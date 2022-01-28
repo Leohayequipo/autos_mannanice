@@ -14,6 +14,8 @@ const ItemList = ({listProducts}) => {
                 Km = {el.km}
                 Category={el.category}
                 Id={el.id}
+                Foto={el.foto}
+
 
             />
         ))}

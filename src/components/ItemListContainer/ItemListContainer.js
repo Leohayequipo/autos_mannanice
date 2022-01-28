@@ -2,26 +2,37 @@ import ItemCount from '../itemCount/itemCount.js'
 import { useState,useEffect } from "react"
 import getProducts from '../../helpers/getProducts.js';
 import ItemList from '../ItemList/ItemList.jsx';
+import { useParams } from 'react-router-dom';
 function onAdd(cant){
     console.log(cant);
 }
 export const ItemListContainer = ({greetings,valor1}) => {
     const [listProducts,setListProducts] = useState([]);
-    const categoryId="Autos";
+    const [loading,setloading]=useState(true);
+    const {idCategoria} =useParams();
+    
    useEffect(()=>{
+      console.log(idCategoria)
        getProducts()
         .then((data) =>
         setListProducts(
-            categoryId ? data.filter((el)=>el.category === categoryId):data
+            idCategoria ? data.filter((el)=>el.category === idCategoria):data
         )
-       )
-        .catch((err)=>console.log(err));
-   },[]);
+        )
+        .catch((err)=>console.log(err))
+        .finally(()=>setloading(false));
+   },[idCategoria]);
 
    return (
-        <div> 
-            <ItemList listProducts={listProducts}/>
-            <ItemCount initial={1} stock={6} onAdd={onAdd} />
+        <div>
+            {loading?<h2>Cargando..</h2>:
+            <>
+                <ItemList listProducts={listProducts}/>
+                <ItemCount initial={1} stock={6} onAdd={onAdd} />
+            </>
+            } 
+            
+            
         </div>
     )
 }
