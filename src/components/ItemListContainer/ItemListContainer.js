@@ -3,9 +3,7 @@ import { useState,useEffect } from "react"
 import getProducts from '../../helpers/getProducts.js';
 import ItemList from '../ItemList/ItemList.jsx';
 import { useParams } from 'react-router-dom';
-function onAdd(cant){
-    console.log(cant);
-}
+
 export const ItemListContainer = ({greetings,valor1}) => {
     const [listProducts,setListProducts] = useState([]);
     const [loading,setloading]=useState(true);
@@ -28,7 +26,6 @@ export const ItemListContainer = ({greetings,valor1}) => {
             {loading?<h2>Cargando..</h2>:
             <>
                 <ItemList listProducts={listProducts}/>
-                <ItemCount initial={1} stock={6} onAdd={onAdd} />
             </>
             } 
             

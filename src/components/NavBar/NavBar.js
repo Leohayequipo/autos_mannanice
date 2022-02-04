@@ -3,7 +3,8 @@ import Navbar    from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav       from 'react-bootstrap/Nav'
 import Cartwidget from '../CartWidget/Cartwidget'
-import { Link,NavLink } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap'
+import ima from './Imagenes/logo1.jpg'
 
 const NavBar = (children) => {
     console.log(children)
@@ -11,36 +12,42 @@ const NavBar = (children) => {
         <div>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-            <Navbar.Brand >
-               <Link to='/'>
-                    AUTOMOTORES
-               </Link>
-            </Navbar.Brand>   
+                <LinkContainer to='/'>
+                    
+                    <Navbar.Brand >
+                    <img
+                        src={ima}
+                        width="100"
+                        height="100"
+                        className="d-inline-block align-middle"
+                        alt="AUTOMOTORES"
+                    />
+                        AUTOMOTORES
+                    </Navbar.Brand>   
+                </LinkContainer>  
+                
             {/*<Navbar.Brand href="#home"></Navbar.Brand>*/}
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
-                <Nav.Link> 
-                    <NavLink to='/categoria/motos' >Motos</NavLink>
-                </Nav.Link>
-                <Nav.Link>
-                   <NavLink to='/categoria/autos' >Autos</NavLink>
-                </Nav.Link>
-                <Nav.Link>
-                     <NavLink to='/categoria/pickUp' >Pick-Up</NavLink>
-                </Nav.Link>
-                <Nav.Link>
-                      <NavLink to='/categoria/offRoad' >Off-Road</NavLink>      
-                </Nav.Link>
-                    
-                    
-                    
-               
+                    <LinkContainer to='/categoria/motos'>
+                        <Nav.Link>Motos</Nav.Link>
+                   </LinkContainer>    
+                    <LinkContainer to='/categoria/autos'>
+                        <Nav.Link  >Autos</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to='/categoria/pickUp'>
+                        <Nav.Link>Pick-Up</Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to='/categoria/offRoad'>
+                        <Nav.Link> Off-Road </Nav.Link>
+                    </LinkContainer>
                 </Nav>
                 <Nav>
-                    <NavLink to='/cart'>
-                        <Cartwidget/>
-                    </NavLink>
+                    <LinkContainer to='/cart'>
+                        <Nav.Link>  <Cartwidget/> </Nav.Link>
+                    </LinkContainer>
+                    
                
                 </Nav>
             </Navbar.Collapse>
