@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ItemCount from '../itemCount/itemCount';
 
@@ -21,11 +22,11 @@ const ItemDetail = ({products}) => {
               <ItemCount initial={1} stock={6} onAdd={onAdd} /> 
             :
               <>
-                <Link to='/cart'>
-                   <button>Terminar compra</button>
-                </Link>
                 <Link to='/'>
-                  <button>Seguir comprando</button>
+                  <Button variant="outline-primary">SEGUIR COMPRANDO</Button>
+                </Link>
+                <Link to='/cart'>
+                  <Button variant="outline-success">TERMINAR COMPRA</Button>
                 </Link>
                 
               </>
