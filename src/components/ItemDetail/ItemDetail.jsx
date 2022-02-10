@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useCartContext } from '../../Context/CartContext';
 import ItemCount from '../itemCount/itemCount';
 
 const ItemDetail = ({products}) => {
+  const {cartList,agregarAlCarrito} = useCartContext();
   const [contador, setContador] = useState(0);
-  function onAdd(cant){
-    setContador(cant);
-    //console.log(cant);
-  }
+    function onAdd(cant){
+      setContador(cant);
+      agregarAlCarrito({...products,cantidad:cant});
+      //console.log(cant);
+    }
+   console.log(cartList) 
   return (
       <div className='row'>
         <div className='col'>

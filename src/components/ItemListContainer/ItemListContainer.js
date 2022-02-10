@@ -1,15 +1,13 @@
-import ItemCount from '../itemCount/itemCount.js'
 import { useState,useEffect } from "react"
 import getProducts from '../../helpers/getProducts.js';
 import ItemList from '../ItemList/ItemList.jsx';
 import { useParams } from 'react-router-dom';
-
 export const ItemListContainer = ({greetings,valor1}) => {
     const [listProducts,setListProducts] = useState([]);
     const [loading,setloading]=useState(true);
     const {idCategoria} =useParams();
-    
-   useEffect(()=>{
+ 
+    useEffect(()=>{
       console.log(idCategoria)
        getProducts()
         .then((data) =>
@@ -20,7 +18,6 @@ export const ItemListContainer = ({greetings,valor1}) => {
         .catch((err)=>console.log(err))
         .finally(()=>setloading(false));
    },[idCategoria]);
-
    return (
         <div>
             {loading?<h2>Cargando..</h2>:
@@ -28,8 +25,6 @@ export const ItemListContainer = ({greetings,valor1}) => {
                 <ItemList listProducts={listProducts}/>
             </>
             } 
-            
-            
         </div>
     )
 }
