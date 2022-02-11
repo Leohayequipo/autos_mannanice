@@ -5,9 +5,11 @@ import Nav       from 'react-bootstrap/Nav'
 import Cartwidget from '../CartWidget/Cartwidget'
 import { LinkContainer } from 'react-router-bootstrap'
 import ima from './Imagenes/logo1.jpg'
+import { useCartContext } from '../../Context/CartContext'
 
 const NavBar = (children) => {
     console.log(children)
+    const {cantidad}=useCartContext();
     return (
         <div>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -45,7 +47,8 @@ const NavBar = (children) => {
                 </Nav>
                 <Nav>
                     <LinkContainer to='/cart'>
-                        <Nav.Link>  <Cartwidget/> </Nav.Link>
+                     
+                        <Nav.Link> {cantidad()!== 0 && cantidad()} <Cartwidget/></Nav.Link>
                     </LinkContainer>
                     
                

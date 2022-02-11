@@ -9,7 +9,8 @@ const ItemDetail = ({products}) => {
   const [contador, setContador] = useState(0);
     function onAdd(cant){
       setContador(cant);
-      agregarAlCarrito({...products,cantidad:cant});
+      agregarAlCarrito({item: products,cantidad:cant});
+      //agregarAlCarrito({...products,cantidad:cant});
       //console.log(cant);
     }
    console.log(cartList) 
