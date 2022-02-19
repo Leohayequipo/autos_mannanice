@@ -8,14 +8,16 @@ import ima from './Imagenes/logo1.jpg'
 import { useCartContext } from '../../Context/CartContext'
 
 const NavBar = (children) => {
+    console.log("muestra children")
+    
     console.log(children)
+
     const {cantidad}=useCartContext();
     return (
         <div>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
                 <LinkContainer to='/'>
-                    
                     <Navbar.Brand >
                     <img
                         src={ima}

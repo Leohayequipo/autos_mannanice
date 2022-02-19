@@ -7,13 +7,11 @@ import ItemCount from '../itemCount/itemCount';
 const ItemDetail = ({products}) => {
   const {cartList,agregarAlCarrito} = useCartContext();
   const [contador, setContador] = useState(0);
-    function onAdd(cant){
+  
+  function onAdd(cant){
       setContador(cant);
       agregarAlCarrito({item: products,cantidad:cant});
-      //agregarAlCarrito({...products,cantidad:cant});
-      //console.log(cant);
-    }
-   console.log(cartList) 
+  }
   return (
       <div className='row'>
         <div className='col'>
@@ -36,7 +34,6 @@ const ItemDetail = ({products}) => {
                 
               </>
           }
-          
         </div>
       </div>
   );

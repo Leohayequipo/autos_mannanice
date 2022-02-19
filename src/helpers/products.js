@@ -103,7 +103,6 @@ const products = [
        foto:'/imagenes/jeep.jpg'
 
     }
-    
   ];
   
   export default products;

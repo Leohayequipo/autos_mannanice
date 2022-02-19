@@ -1,29 +1,33 @@
 import { useState,useEffect } from "react"
-import getProducts from '../../helpers/getProducts.js';
 import ItemList from '../ItemList/ItemList.jsx';
 import { useParams } from 'react-router-dom';
-export const ItemListContainer = ({greetings,valor1}) => {
+import { ProgressBar } from "react-bootstrap";
+import {getFirestore,getDocs,collection,query,where} from "firebase/firestore"
+
+export const ItemListContainer = () => {
     const [listProducts,setListProducts] = useState([]);
     const [loading,setloading]=useState(true);
     const {idCategoria} =useParams();
- 
+    
     useEffect(()=>{
-      console.log(idCategoria)
-       getProducts()
-        .then((data) =>
-        setListProducts(
-            idCategoria ? data.filter((el)=>el.category === idCategoria):data
-        )
-        )
-        .catch((err)=>console.log(err))
-        .finally(()=>setloading(false));
-   },[idCategoria]);
+        const db = getFirestore();
+        const queryCollection = collection(db,'items')
+        const queryFiltro = query(queryCollection,where('category',idCategoria ? '==' : '!=', idCategoria ? idCategoria : ''))
+        getDocs(queryFiltro)
+        .then(resp => setListProducts(resp.docs.map(prod => ({id:prod.id, ...prod.data()}) )))
+        .catch((err)=> console.log())
+        .finally(()=>setloading(false))
+
+        
+    },[idCategoria]);
    return (
         <div>
-            {loading?<h2>Cargando..</h2>:
-            <>
-                <ItemList listProducts={listProducts}/>
-            </>
+            { loading ?
+                <ProgressBar animated now={45} />
+            :
+                <>
+                    <ItemList listProducts={listProducts}/>
+                </>
             } 
         </div>
     )

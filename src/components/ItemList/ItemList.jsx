@@ -16,7 +16,7 @@ const ItemList = ({listProducts}) => {
                 Km = {el.km}
                 Category={el.category}
                 Id={el.id}
-                Foto={el.foto}
+                Foto={el.image}
             />
         ))}
       </Row>  
