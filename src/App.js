@@ -7,9 +7,7 @@ import { ItemListContainer } from './components/ItemListContainer/ItemListContai
 import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import Cart from './components/Cart/Cart';
 import CartContextProvider from './Context/CartContext';
-
-export const ContextApp = createContext("Leo");
-
+export const ContextApp = createContext();
 export const App = () => {
  
   return (
