@@ -1,5 +1,6 @@
 import { getFirestore,collection, addDoc,doc, updateDoc, query, where, documentId, writeBatch, getDocs } from "firebase/firestore";
 import { useCartContext } from "../../Context/CartContext";
+import ComponentForm from "../ComponentForm/componentForm";
 const Cart = () => {
 const {cartList,vaciarCarrito,sumaTotal,borrarItem}=useCartContext();
 
@@ -51,7 +52,9 @@ const buy = async (e)=>{
           })
     ))
     .catch(err => console.log(err))
-    .finally(() =>alert('Orden generado con existo'), vaciarCarrito())
+    .finally(() =>
+        alert('ORDEN GENERADO CON ÉXITO'), 
+        vaciarCarrito())
     batch.commit()
 
 
@@ -67,6 +70,8 @@ const buy = async (e)=>{
                           <li>Cantidad: {produc.cantidad} </li>borrarItem
                           <button onClick={() => borrarItem(produc.item.id)}>Borrar Item</button>
                         </div> )}
+           
+              <ComponentForm />
               {<button onClick={buy}>Crear orden</button>}              
               
               {`suma ${sumaTotal()}`}
@@ -75,6 +80,7 @@ const buy = async (e)=>{
           :
             <label>
               Sigo vacio (:
+            
             </label>
           }
         </div>;

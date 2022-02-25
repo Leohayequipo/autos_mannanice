@@ -10,8 +10,8 @@ const Item = ({Id,Name,Stock,Price,Category,Km,Year,Foto}) => {
           <Card.Body >
             <Card.Title>{`${Name} - ${Year}`}</Card.Title>
             <Card.Text>
-              El Vehiculo tiene una valor de ${`${Price}`} pesos Argentinos.
-               
+              El Vehiculo tiene un valor de ${`${Price}`} pesos Argentinos.
+              Cantidad disponibles: {`${Stock}`} 
             </Card.Text>
             <Link to={`/detalle/${Id}`} >
               <Button variant="primary">+ Info</Button>

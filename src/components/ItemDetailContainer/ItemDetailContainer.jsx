@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { ProgressBar } from 'react-bootstrap';
+import {  Spinner } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import ItemDetail from '../ItemDetail/ItemDetail';
 import {getFirestore,doc,getDoc} from "firebase/firestore"
@@ -21,7 +21,7 @@ useEffect(()=>{
     return (
         <>
             {loading ? 
-               <ProgressBar animated now={45} />
+                <Spinner animation="border" variant="dark" />
             :
              <ItemDetail products={products}/>
             }

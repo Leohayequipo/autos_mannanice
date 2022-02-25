@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react"
 import ItemList from '../ItemList/ItemList.jsx';
 import { useParams } from 'react-router-dom';
-import { ProgressBar } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import {getFirestore,getDocs,collection,query,where} from "firebase/firestore"
 
 export const ItemListContainer = () => {
@@ -23,7 +23,8 @@ export const ItemListContainer = () => {
    return (
         <div>
             { loading ?
-                <ProgressBar animated now={45} />
+                //<ProgressBar animated now={45} />
+                <Spinner animation="border" variant="dark" />
             :
                 <>
                     <ItemList listProducts={listProducts}/>
