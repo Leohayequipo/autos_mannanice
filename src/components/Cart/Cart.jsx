@@ -22,22 +22,7 @@ const buy = async (e)=>{
         cant
       }
     })
-    //console.log(purchaseOrder)
-   /*AGREGAR 
-    const db = getFirestore()
-    const ordersCollection = collection(db,'orders')
-    
-    await addDoc(ordersCollection,purchaseOrder)
-    .then(resp => console.log(resp))*/
    
-   /* update
-    const db = getFirestore()
-    const queryDoc = doc(db,'items','6MNjjjohyDOd1WeJlvFZ')
-    updateDoc(queryDoc,{
-      stock : 10
-    })
-    .then(resp=> console.log(resp))
-     */
     const db = getFirestore()
     const queryCollection = collection(db,'items')
     const queryUpdateStock = query(
