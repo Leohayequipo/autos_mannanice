@@ -4,7 +4,7 @@ import { getFirestore,collection, addDoc,doc, updateDoc, query, where, documentI
 import { useCartContext } from '../../Context/CartContext';
 const ComponentForm = () => {
     const {cartList,vaciarCarrito,sumaTotal,getIdOrder}=useCartContext();
-
+    const [idOrder, setIdOrder] = useState('')
     
   
     const buy = async (e)=>{
@@ -31,9 +31,9 @@ const ComponentForm = () => {
         const ordersCollection = collection (db, 'orders')
        
         await addDoc( ordersCollection, purchaseOrder)
-        .then(resp =>alert(`Orden Generada con Exito. ID: ${resp.id}` ))
+        .then(resp =>setIdOrder(resp.id))
        
-       
+         alert(idOrder);
 
         const queryCollection = collection(db,'items')
         const queryUpdateStock = query(
