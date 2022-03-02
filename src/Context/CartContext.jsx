@@ -8,8 +8,8 @@ import { createContext} from "react";
 
 
 function CartContextProvider({children}) {
+
     const [cartList, setCartList] = useState([]);
-    
     function agregarAlCarrito(item){
         //findIndex -1 no existe - >0 existe 
         const index = cartList.findIndex(prod=> prod.item.id === item.item.id)
@@ -44,8 +44,7 @@ function CartContextProvider({children}) {
           vaciarCarrito,
           sumaTotal,
           cantidad,
-          borrarItem   
-
+          borrarItem
     }}>
               {children}
           </cartContext.Provider>;

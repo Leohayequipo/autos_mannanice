@@ -3,9 +3,9 @@ import { Button, Form } from 'react-bootstrap'
 import { getFirestore,collection, addDoc,doc, updateDoc, query, where, documentId, writeBatch, getDocs } from "firebase/firestore";
 import { useCartContext } from '../../Context/CartContext';
 const ComponentForm = () => {
-    const {cartList,vaciarCarrito,sumaTotal,borrarItem}=useCartContext();
+    const {cartList,vaciarCarrito,sumaTotal,getIdOrder}=useCartContext();
 
-    const [idOrder, setIdOrder] = useState('')
+    
   
     const buy = async (e)=>{
         e.preventDefault();
@@ -31,11 +31,9 @@ const ComponentForm = () => {
         const ordersCollection = collection (db, 'orders')
        
         await addDoc( ordersCollection, purchaseOrder)
-        .then(resp => setIdOrder(resp.id) )
+        .then(resp =>alert(`Orden Generada con Exito. ID: ${resp.id}` ))
        
-        console.log("el idOrder es:")
-        
-        console.log(idOrder)
+       
 
         const queryCollection = collection(db,'items')
         const queryUpdateStock = query(
@@ -51,7 +49,7 @@ const ComponentForm = () => {
         ))
         .catch(err => console.log(err))
         .finally(() =>
-            alert('ORDEN GENERADO CON ÉXITO'), 
+            /*alert(`ORDEN GENERADO CON ÉXITO ${idOrder}`), */
             vaciarCarrito())
         batch.commit()
   }
