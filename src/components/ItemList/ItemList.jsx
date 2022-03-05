@@ -5,7 +5,7 @@ import { Row } from 'react-bootstrap';
 const ItemList = ({listProducts}) => {
   return (
     <>  
-        <Row xs={2} md={3} lg={4} className="g-4">
+        <Row xs={1} md={3} lg={4} className="g-4">
         {listProducts.map((el)=>(
             <Item 
                 key={el.id} 

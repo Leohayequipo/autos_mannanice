@@ -1,4 +1,5 @@
 import { useState } from "react"
+import {Button, FormControl, InputGroup } from "react-bootstrap";
 
 function ItemCount({initial,stock,onAdd}) {
     const [contador,setcontador]=useState(initial);
@@ -16,12 +17,20 @@ function ItemCount({initial,stock,onAdd}) {
         onAdd(contador)
     }
     return (
-        <div className="container w-50">
-            <button className="btn btn-outline-primary mb-2 mt-4" onClick={handleAumentar} >+</button>
-                {contador}
-            <button className="btn btn-outline-primary mb-2 mt-4 " onClick={handleRestar}>-</button><br/>
-            <button className="btn btn-outline-primary" onClick={agregar} >Agregar al carrito</button><br/>
-        </div>
+        <>
+            <div className="container">
+                <div className="row">
+                    <div className="col-12  offset-md-3 col-md-6 ">
+                        <InputGroup className="  mb-3 " >
+                            <Button  variant="dark" onClick={handleRestar} >-</Button >
+                            <FormControl className="text-center" value={contador} />
+                            <Button  variant="dark" onClick={handleAumentar}>+</Button >
+                        </InputGroup>
+                        <Button variant="dark" onClick={stock !== 0 && agregar} >{stock !== 0 ? 'AGREGAR AL CARRITO' : 'SIN STOCK'} </Button>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 export default ItemCount

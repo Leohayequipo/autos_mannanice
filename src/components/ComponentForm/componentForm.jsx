@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Alert, Button, Form } from 'react-bootstrap'
 import { getFirestore,collection, addDoc,doc, updateDoc, query, where, documentId, writeBatch, getDocs } from "firebase/firestore";
 import { useCartContext } from '../../Context/CartContext';
 const ComponentForm = () => {
-    const {cartList,vaciarCarrito,sumaTotal,getIdOrder}=useCartContext();
-    const [idOrder, setIdOrder] = useState('')
-    
-  
+    const [EmailEstate, setEmailEstate] = useState({State:false,Info:'LOS EMAIL NO SON IGUALES',style:'light'})
+    const {cartList,vaciarCarrito,sumaTotal}=useCartContext();
     const buy = async (e)=>{
         e.preventDefault();
-        
         let purchaseOrder   = {}
         purchaseOrder.buyer = dataForm    
         purchaseOrder.total = sumaTotal()
-        
         purchaseOrder.items = cartList.map(cartItem => {
             const id    = cartItem.item.id;
             const name  = cartItem.item.name;
@@ -31,9 +27,7 @@ const ComponentForm = () => {
         const ordersCollection = collection (db, 'orders')
        
         await addDoc( ordersCollection, purchaseOrder)
-        .then(resp =>setIdOrder(resp.id))
-       
-         alert(idOrder);
+        .then(resp =>alert(`Orden Generada con Exito. ID: ${resp.id}` ))
 
         const queryCollection = collection(db,'items')
         const queryUpdateStock = query(
@@ -49,7 +43,6 @@ const ComponentForm = () => {
         ))
         .catch(err => console.log(err))
         .finally(() =>
-            /*alert(`ORDEN GENERADO CON ÉXITO ${idOrder}`), */
             vaciarCarrito())
         batch.commit()
   }
@@ -66,12 +59,21 @@ const ComponentForm = () => {
             ...dataForm,
             [event.target.name]:event.target.value
         })
-      
         console.log(dataForm);
     }
-   
+    async function DuplicatedEmail(event){
+        event.preventDefault()
+       
+        if(event.target.value === dataForm.email){       
+            setEmailEstate({State:true,Info:'Correcto',style:'success'})
+        }else{         
+            setEmailEstate({State:false,Info:'Los emails no coinciden!',style:'warning'})
+        }
+    }
+
   return (
-     <Form onSubmit={buy}>
+     <Form className="offset-2 w-75 mb-4" onSubmit={buy}>
+        <h3>DATOS DEL COMPRADOR</h3>
         <Form.Group className="mb-3" controlId="formName">
             <Form.Label>NOMBRE</Form.Label>
             <Form.Control 
@@ -108,9 +110,12 @@ const ComponentForm = () => {
                 type="email" 
                 name="email2" 
                 placeholder="Re-email" 
-                onChange={handleChange} 
-                value={dataForm.email2}/>
+                onChange={DuplicatedEmail}
+                />
         </Form.Group>
+        <Alert className='small mt-1'  variant={EmailEstate.style}>
+                     {EmailEstate.Info}
+        </Alert> 
         <Form.Group className="mb-3" controlId="formDni">
             <Form.Label>TELEFONO</Form.Label>
             <Form.Control 
@@ -121,7 +126,7 @@ const ComponentForm = () => {
                 value={dataForm.phone}/>
         </Form.Group>
         <Button variant="primary" type="submit">
-        Submit
+            FINALIZAR COMPRA
         </Button>
     </Form>
   )

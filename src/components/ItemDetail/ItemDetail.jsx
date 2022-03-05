@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../../Context/CartContext';
 import ItemCount from '../itemCount/itemCount';
@@ -13,29 +13,44 @@ const ItemDetail = ({products}) => {
       agregarAlCarrito({item: products,cantidad:cant});
   }
   return (
+    <div className="container">
       <div className='row'>
-        <div className='col'>
-          <h1>La categoria:{products.category}</h1>
-          <h4>Nombre:{products.name}</h4>
-          <h4>${products.price}</h4>
-        </div>
-        <div className='col'>
+        <div className='offset-lg-3 col-lg-6 mt-4 mb-4'>
+          <Card >
+            <Card.Img variant="top" src={products.image}/>
+            <Card.Body>
+              <Card.Title>CATEGORIA: {products.category}</Card.Title>
+              <Card.Text>
+                PRODUCTO: {products.name}
+              </Card.Text>
+            </Card.Body>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem>AÑO: {products.year}</ListGroupItem>
+              <ListGroupItem>KM: {products.km} </ListGroupItem>
+              <ListGroupItem>PRECIO: ${products.price}</ListGroupItem>
+              <ListGroupItem>STOCK: {products.stock}</ListGroupItem>
+
+            </ListGroup>
+            <Card.Body>
           {
             contador === 0 ?
-              <ItemCount initial={1} stock={6} onAdd={onAdd} /> 
+              <ItemCount initial={1} stock={products.stock} onAdd={onAdd} /> 
             :
               <>
                 <Link to='/'>
-                  <Button variant="outline-primary">SEGUIR COMPRANDO</Button>
+                  <Button variant="outline-primary" className="ml-4">SEGUIR COMPRANDO</Button>
                 </Link>
                 <Link to='/cart'>
                   <Button variant="outline-success">TERMINAR COMPRA</Button>
                 </Link>
-                
               </>
           }
+           </Card.Body>
+          </Card>
         </div>
       </div>
+    </div>
+
   );
 };
 

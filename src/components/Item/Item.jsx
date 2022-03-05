@@ -5,7 +5,7 @@ const Item = ({Id,Name,Stock,Price,Category,Km,Year,Foto}) => {
   return (
 
       <Col  key={Id} >
-        <Card className='h-100' ml={4} style={{ width: '18rem', padding: '2%', margin:'5%' }}>
+        <Card  ml={4} style={{  padding: '2%', margin:'2%' }}>
           <Card.Img variant="top" src={Foto} />
           <Card.Body >
             <Card.Title>{`${Name} - ${Year}`}</Card.Title>
@@ -14,7 +14,7 @@ const Item = ({Id,Name,Stock,Price,Category,Km,Year,Foto}) => {
               Cantidad disponibles: {`${Stock}`} 
             </Card.Text>
             <Link to={`/detalle/${Id}`} >
-              <Button variant="primary">+ Info</Button>
+              <Button variant="dark">+ INFO</Button>
             </Link>
           </Card.Body>
         </Card>  
