@@ -3,7 +3,7 @@ import { Alert, Button, Form } from 'react-bootstrap'
 import { getFirestore,collection, addDoc,doc, updateDoc, query, where, documentId, writeBatch, getDocs } from "firebase/firestore";
 import { useCartContext } from '../../Context/CartContext';
 const ComponentForm = () => {
-    const [EmailEstate, setEmailEstate] = useState({State:false,Info:'LOS EMAIL NO SON IGUALES',style:'light'})
+    const [EmailEstate, setEmailEstate] = useState({State:false,Info:'',style:'light'})
     const {cartList,vaciarCarrito,sumaTotal}=useCartContext();
     const buy = async (e)=>{
         e.preventDefault();
