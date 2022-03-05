@@ -1,53 +1,49 @@
-import React, { useState,useContext } from 'react';
-import { createContext} from "react";
+import React, { useState,useContext,createContext } from 'react';
+const cartContext = createContext([]);
 
- const cartContext = createContext([]);
- export function useCartContext(){
-     return useContext(cartContext);
- }
-
+export function useCartContext(){
+  return useContext(cartContext);
+}
 
 function CartContextProvider({children}) {
-
   const [cartList, setCartList] = useState([]);
-      function agregarAlCarrito(item){
+      function addToCart(item){
           //findIndex -1 no existe - >0 existe 
           const index = cartList.findIndex(prod=> prod.item.id === item.item.id)
-          //console.log(item)
           if( index===-1){
             setCartList([...cartList,item])
           }else{
-            const cant = cartList[index].cantidad
-            cartList[index].cantidad=item.cantidad + cant;
+            const cant = cartList[index].cant
+            cartList[index].cant=item.cant + cant;
             const newCartList = [...cartList]
             setCartList(newCartList);
           }
       }  
-      const sumaTotal  = ()=>{
-        return cartList.reduce((acu,prod)=>acu+=(prod.item.price*prod.cantidad),0)
+      const totalAmount  = ()=>{
+        return cartList.reduce((acu,prod)=>acu+=(prod.item.price*prod.cant),0)
       }
-      const cantidad   = ()=>{
-        return cartList.reduce((acu,prod)=>acu+=prod.cantidad,0)
+      const ItemCant   = ()=>{
+        return cartList.reduce((acu,prod)=>acu+=prod.cant,0)
 
       }
-      const borrarItem = (id)=>{
+      const deleteItem = (id)=>{
         setCartList(cartList.filter(prod=>prod.item.id !== id))
       }
 
-      function vaciarCarrito(){
+      function emptyCart(){
         setCartList([]);
       }
     return <cartContext.Provider value={{
           cartList,
-          agregarAlCarrito,
-          vaciarCarrito,
-          sumaTotal,
-          cantidad,
-          borrarItem
+          addToCart,
+          emptyCart,
+          totalAmount,
+          ItemCant,
+          deleteItem
         
 
     }}>
-              {children}
+          {children}
           </cartContext.Provider>;
 }
 

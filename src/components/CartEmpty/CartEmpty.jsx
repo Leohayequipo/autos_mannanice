@@ -2,7 +2,6 @@ import { Button, Card } from 'react-bootstrap'
 import noDuermas from './Images/noDuermas.jpg'
 import { BsFillAlarmFill,BsFillEmojiWinkFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
-
 export const CartEmpty = () => {
   return (
      <> 

@@ -5,12 +5,15 @@ import { useCartContext } from '../../Context/CartContext';
 import ItemCount from '../itemCount/itemCount';
 
 const ItemDetail = ({products}) => {
-  const {cartList,agregarAlCarrito} = useCartContext();
-  const [contador, setContador] = useState(0);
+  const {addToCart} = useCartContext();
+  const [counter, setCounter] = useState(0);
   
   function onAdd(cant){
-      setContador(cant);
-      agregarAlCarrito({item: products,cantidad:cant});
+    setCounter(cant);
+    addToCart({
+        item:products,
+        cant:cant
+    });
   }
   return (
     <div className="container">
@@ -29,11 +32,10 @@ const ItemDetail = ({products}) => {
               <ListGroupItem>KM: {products.km} </ListGroupItem>
               <ListGroupItem>PRECIO: ${products.price}</ListGroupItem>
               <ListGroupItem>STOCK: {products.stock}</ListGroupItem>
-
             </ListGroup>
             <Card.Body>
           {
-            contador === 0 ?
+            counter === 0 ?
               <ItemCount initial={1} stock={products.stock} onAdd={onAdd} /> 
             :
               <>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Alert, Button, Form } from 'react-bootstrap'
-import { getFirestore,collection, addDoc,doc, updateDoc, query, where, documentId, writeBatch, getDocs } from "firebase/firestore";
+import { getFirestore,collection, addDoc,query, where, documentId, writeBatch, getDocs } from "firebase/firestore";
 import { useCartContext } from '../../Context/CartContext';
+
 const ComponentForm = () => {
     const [EmailEstate, setEmailEstate] = useState({State:false,Info:'',style:'light'})
     const {cartList,vaciarCarrito,sumaTotal}=useCartContext();
@@ -63,7 +64,6 @@ const ComponentForm = () => {
     }
     async function DuplicatedEmail(event){
         event.preventDefault()
-       
         if(event.target.value === dataForm.email){       
             setEmailEstate({State:true,Info:'Correcto',style:'success'})
         }else{         

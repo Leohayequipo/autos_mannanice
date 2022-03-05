@@ -11,23 +11,19 @@ export const ContextApp = createContext();
 export const App = () => {
  
   return (
-    
         <BrowserRouter>
           <CartContextProvider>
             <div className="App" >
               <NavBar />
               <Routes>
                 <Route exact path='/' element={<ItemListContainer/>} />
-                <Route exact path='/categoria/:idCategoria' element={<ItemListContainer/>} />
-
-                <Route exact path='/detalle/:idProducto' element={<ItemDetailContainer/>} />
+                <Route exact path='/category/:IdCategory' element={<ItemListContainer/>} />
+                <Route exact path='/detail/:IdProduct' element={<ItemDetailContainer/>} />
                 <Route exact path='/cart' element={<Cart/>} />
               </Routes>
             </div>
           </CartContextProvider>  
         </BrowserRouter>
-    
-    
   )
 }
 

@@ -1,12 +1,10 @@
 
-import { Badge, Button, Card, ListGroup } from "react-bootstrap";
+import { Badge, Button, Card, ListGroup,Image } from "react-bootstrap";
 import { useCartContext } from "../../Context/CartContext";
 import ComponentForm from "../ComponentForm/componentForm";
-import Image from 'react-bootstrap/Image'
 import { CartEmpty } from "../CartEmpty/CartEmpty";
 const Cart = () => {
-  const {cartList,vaciarCarrito,sumaTotal,borrarItem}=useCartContext();
- 
+  const {cartList,emptyCart,totalAmount,deleteItem}=useCartContext();
   return <div>
           <div className="container">
             <div className="row">
@@ -18,18 +16,15 @@ const Cart = () => {
                         <Card.Body>
                          <div className="container">
                            <div className="row">
-                             <div className="col-4">
-                              
-                             </div>
-                             <div className="col-8">
+                             <div className="offset-4 col-8">
                                 <Card >
                                   <ListGroup variant="flush">
                                     <ListGroup.Item>
-                                      USTED DEBE ABONAR:  <h3>${sumaTotal()}</h3> PESO ARGENTINOS
+                                      USTED DEBE ABONAR: <h3>${totalAmount()}</h3> PESO ARGENTINOS
                                    </ListGroup.Item>
                                    <ListGroup.Item>
                                       CANCELAR TODO
-                                      {<Button variant="warning" onClick={vaciarCarrito}>LIMPIAR</Button>}
+                                      {<Button variant="warning" onClick={emptyCart}>LIMPIAR</Button>}
                                    </ListGroup.Item>
                                   </ListGroup>
                                 </Card>
@@ -54,9 +49,9 @@ const Cart = () => {
                                   <ListGroup variant="flush">
                                     <ListGroup.Item>
                                       {produc.item.name} AÑO {produc.item.year}, {produc.item.km} KMs.</ListGroup.Item>
-                                    <ListGroup.Item>CANTIDAD SOLICITADAS: <h5>{produc.cantidad} DE ({produc.item.stock} disponibles)</h5> </ListGroup.Item>
-                                    <ListGroup.Item>TOTAL <h3>$ {produc.cantidad * produc.item.price } </h3> </ListGroup.Item>
-                                    <ListGroup.Item><Badge className="btn" pill bg="danger" onClick={() => borrarItem(produc.item.id)} >ELIMINAR</Badge></ListGroup.Item>
+                                    <ListGroup.Item>CANTIDAD SOLICITADAS: <h5>{produc.cant} DE ({produc.item.stock} disponibles)</h5> </ListGroup.Item>
+                                    <ListGroup.Item>TOTAL <h3>$ {produc.cant * produc.item.price } </h3> </ListGroup.Item>
+                                    <ListGroup.Item><Badge className="btn" pill bg="danger" onClick={() => deleteItem(produc.item.id)} >ELIMINAR</Badge></ListGroup.Item>
                                   </ListGroup>
                                 </Card>
                               </div>
@@ -74,5 +69,4 @@ const Cart = () => {
           </div>
         </div>;
 };
-
 export default Cart;

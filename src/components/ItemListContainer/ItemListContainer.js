@@ -6,24 +6,22 @@ import {getFirestore,getDocs,collection,query,where} from "firebase/firestore"
 
 export const ItemListContainer = () => {
     const [listProducts,setListProducts] = useState([]);
-    const [loading,setloading]=useState(true);
-    const {idCategoria} =useParams();
+    const [loading,setloading] = useState(true);
+    const {IdCategory} = useParams();
     
     useEffect(()=>{
         const db = getFirestore();
         const queryCollection = collection(db,'items')
-        const queryFiltro = query(queryCollection,where('category',idCategoria ? '==' : '!=', idCategoria ? idCategoria : ''))
+        const queryFiltro = query(queryCollection,where('category',IdCategory ? '==' : '!=', IdCategory ? IdCategory : ''))
         getDocs(queryFiltro)
         .then(resp => setListProducts(resp.docs.map(prod => ({id:prod.id, ...prod.data()}) )))
         .catch((err)=> console.log())
         .finally(()=>setloading(false))
+    },[IdCategory]);
 
-        
-    },[idCategoria]);
-   return (
+    return (
         <div>
             { loading ?
-                //<ProgressBar animated now={45} />
                 <Spinner animation="border" variant="dark" />
             :
                 <>
