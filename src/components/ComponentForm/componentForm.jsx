@@ -5,17 +5,17 @@ import { useCartContext } from '../../Context/CartContext';
 
 const ComponentForm = () => {
     const [EmailEstate, setEmailEstate] = useState({State:false,Info:'',style:'light'})
-    const {cartList,vaciarCarrito,sumaTotal}=useCartContext();
+    const {cartList,emptyCart,totalAmount}=useCartContext();
     const buy = async (e)=>{
         e.preventDefault();
         let purchaseOrder   = {}
         purchaseOrder.buyer = dataForm    
-        purchaseOrder.total = sumaTotal()
+        purchaseOrder.total = totalAmount()
         purchaseOrder.items = cartList.map(cartItem => {
             const id    = cartItem.item.id;
             const name  = cartItem.item.name;
             const price = cartItem.item.price;
-            const cant  = cartItem.cantidad;
+            const cant  = cartItem.cant;
             return{
                 id,
                 name,
@@ -39,12 +39,12 @@ const ComponentForm = () => {
        
         await getDocs(queryUpdateStock)
         .then(resp => resp.docs.forEach(res => batch.update(res.ref,{
-              stock:res.data().stock - cartList.find(item=>item.item.id === res.id).cantidad
+              stock:res.data().stock - cartList.find(item=>item.item.id === res.id).cant
               })
         ))
         .catch(err => console.log(err))
         .finally(() =>
-            vaciarCarrito())
+            emptyCart())
         batch.commit()
   }
     const[dataForm , setDataForm] = useState({
@@ -60,7 +60,6 @@ const ComponentForm = () => {
             ...dataForm,
             [event.target.name]:event.target.value
         })
-        console.log(dataForm);
     }
     async function DuplicatedEmail(event){
         event.preventDefault()
